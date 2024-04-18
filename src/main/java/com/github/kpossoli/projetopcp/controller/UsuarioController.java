@@ -6,25 +6,28 @@ import com.github.kpossoli.projetopcp.model.Usuario;
 import com.github.kpossoli.projetopcp.service.UsuarioService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/usuarios")
 public class UsuarioController {
     
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
+    private final UsuarioMapper usuarioMapper;
 
-    @Autowired
-    private UsuarioMapper usuarioMapper;
-
-    @PostMapping("/usuarios")
-    public void criarUsuario(@RequestBody @Valid UsuarioDto usuarioDto) {
+    @PostMapping
+    public ResponseEntity<UsuarioDto> criarUsuario(@RequestBody @Valid UsuarioDto usuarioDto) {
         Usuario usuario = usuarioMapper.toEntity(usuarioDto);
-        usuarioService.criarUsuario(usuario);
+        Usuario usuarioSalvo = usuarioService.criarUsuario(usuario);
+        UsuarioDto usuarioSalvoDto = usuarioMapper.toDto(usuarioSalvo);
+        return ResponseEntity.ok(usuarioSalvoDto);
     }
 
 }
