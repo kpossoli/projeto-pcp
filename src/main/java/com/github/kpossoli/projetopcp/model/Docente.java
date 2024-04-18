@@ -33,7 +33,7 @@ public class Docente {
 	@Getter @Setter
 	private LocalDate dataEntrada;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "id_usuario")
 	@Getter @Setter
 	private Usuario usuario;
