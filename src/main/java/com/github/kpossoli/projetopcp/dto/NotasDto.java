@@ -10,8 +10,6 @@ public class NotasDto {
 
 	private Long id;
 
-	private Long version;
-
 	private BigDecimal valor;
 
 	private LocalDate data;

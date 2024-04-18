@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Version;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,13 +22,9 @@ import lombok.ToString;
 public class Aluno {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Getter
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter @Setter
 	private Long id;
-
-	@Version
-	@Getter
-	private Long version;
 
 	@Getter @Setter
 	private String nome;

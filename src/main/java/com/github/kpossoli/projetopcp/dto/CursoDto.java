@@ -9,8 +9,6 @@ public class CursoDto {
 
 	private Long id;
 
-	private Long version;
-
 	private String nome;
 
 	private List<MateriaDto> materias;

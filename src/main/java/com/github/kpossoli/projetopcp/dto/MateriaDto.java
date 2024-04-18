@@ -7,8 +7,6 @@ public class MateriaDto {
 
 	private Long id;
 
-	private Long version;
-
 	private String nome;
 
 }
