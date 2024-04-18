@@ -2,7 +2,6 @@ CREATE TABLE aluno (
 	id bigserial NOT NULL,
 	data_nascimento date,
 	nome varchar(255),
-	version int8,
 	id_usuario int8,
 	id_turma int8,
 	CONSTRAINT pk_aluno PRIMARY KEY (id)
@@ -11,7 +10,6 @@ CREATE TABLE aluno (
 CREATE TABLE curso (
 	id bigserial NOT NULL,
 	nome varchar(255),
-	version int8,
 	CONSTRAINT pk_curso PRIMARY KEY (id)
 );
 
@@ -19,7 +17,6 @@ CREATE TABLE docente (
 	id bigserial NOT NULL,
 	data_entrada date,
 	nome varchar(255),
-	version int8,
 	id_usuario int8,
 	CONSTRAINT pk_docente PRIMARY KEY (id)
 );
@@ -27,7 +24,6 @@ CREATE TABLE docente (
 CREATE TABLE materia (
 	id bigserial NOT NULL,
 	nome varchar(255),
-	version int8,
 	id_curso int8,
 	CONSTRAINT pk_materia PRIMARY KEY (id)
 );
@@ -36,7 +32,6 @@ CREATE TABLE notas (
 	id bigserial NOT NULL,
 	data date,
 	valor numeric(19, 2),
-	version int8,
 	id_aluno int8,
 	id_docente int8,
 	id_materia int8,
@@ -46,14 +41,12 @@ CREATE TABLE notas (
 CREATE TABLE papel (
 	id bigserial NOT NULL,
 	nome varchar(255),
-	version int8,
 	CONSTRAINT pk_papel PRIMARY KEY (id)
 );
 
 CREATE TABLE turma (
 	id bigserial NOT NULL,
 	nome varchar(255),
-	version int8,
 	id_docente int8,
 	id_curso int8,
 	CONSTRAINT pk_turma PRIMARY KEY (id)
@@ -64,7 +57,6 @@ CREATE TABLE usuario (
 	login varchar(255),
 	nome varchar(255),
 	senha varchar(255),
-	version int8,
 	id_papel int8,
 	CONSTRAINT pk_usuario PRIMARY KEY (id)
 );
@@ -138,3 +130,10 @@ ALTER TABLE IF EXISTS usuario
 	REFERENCES papel;
 
 CREATE INDEX idx_usuario_id_papel ON usuario (id_papel);
+
+
+INSERT INTO public.papel(id, nome, version) VALUES (1, 'ADM', 1);
+INSERT INTO public.papel(id, nome, version) VALUES (2, 'PEDAGOGICO', 1);
+INSERT INTO public.papel(id, nome, version) VALUES (3, 'RECRUITER', 1);
+INSERT INTO public.papel(id, nome, version) VALUES (4, 'PROFESSOR', 1);
+INSERT INTO public.papel(id, nome, version) VALUES (5, 'ALUNO', 1);

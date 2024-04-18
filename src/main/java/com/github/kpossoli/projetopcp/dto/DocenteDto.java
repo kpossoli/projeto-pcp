@@ -9,8 +9,6 @@ public class DocenteDto {
 
 	private Long id;
 
-	private Long version;
-
 	private String nome;
 
 	private LocalDate dataEntrada;

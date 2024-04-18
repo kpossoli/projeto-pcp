@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Version;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,13 +16,9 @@ import lombok.ToString;
 public class Materia {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Getter
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter @Setter
 	private Long id;
-
-	@Version
-	@Getter
-	private Long version;
 
 	@Getter @Setter
 	private String nome;
