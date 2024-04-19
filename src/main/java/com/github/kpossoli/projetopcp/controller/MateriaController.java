@@ -25,7 +25,7 @@ public class MateriaController {
     private final MateriaMapper materiaMapper;
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('DOCENTE_READ')")
+    @PreAuthorize("hasAuthority('MATERIA_READ')")
     public ResponseEntity<MateriaDto> obter(@PathVariable Long id) {
         Materia materia = materiaService.obter(id);
         MateriaDto materiaDto = materiaMapper.toDto(materia);
@@ -34,7 +34,7 @@ public class MateriaController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('DOCENTE_READ')")
+    @PreAuthorize("hasAuthority('MATERIA_READ')")
     public ResponseEntity<List<MateriaDto>> listar() {
         List<Materia> materias = materiaService.listar();
         List<MateriaDto> materiasDto = materiaMapper.toDto(materias);
@@ -43,7 +43,7 @@ public class MateriaController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('DOCENTE_WRITE')")
+    @PreAuthorize("hasAuthority('MATERIA_WRITE')")
     public ResponseEntity<MateriaDto> criar(@RequestBody @Valid MateriaDto materiaDto) {
         Materia materia = materiaMapper.toEntity(materiaDto);
         Materia materiaSalvo = materiaService.criar(materia);
@@ -53,7 +53,7 @@ public class MateriaController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('DOCENTE_WRITE')")
+    @PreAuthorize("hasAuthority('MATERIA_WRITE')")
     public ResponseEntity<MateriaDto> atualizar(@PathVariable Long id, @RequestBody @Valid MateriaDto materiaDto) {
         Materia materia = materiaMapper.toEntity(materiaDto);
         Materia materiaSalvo = materiaService.atualizar(id, materia);
@@ -63,7 +63,7 @@ public class MateriaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('DOCENTE_DELETE')")
+    @PreAuthorize("hasAuthority('MATERIA_DELETE')")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         materiaService.excluir(id);
 

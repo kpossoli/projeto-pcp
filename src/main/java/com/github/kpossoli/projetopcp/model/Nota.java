@@ -19,7 +19,7 @@ import lombok.ToString;
 @Entity
 @ToString
 @EqualsAndHashCode(of = "id")
-public class Notas {
+public class Nota {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
