@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class TurmaController {
     private final TurmaMapper turmaMapper;
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('TURMA_READ')")
     public ResponseEntity<TurmaDto> obter(@PathVariable Long id) {
         Turma turma = turmaService.obter(id);
         TurmaDto turmaDto = turmaMapper.toDto(turma);
@@ -32,6 +34,7 @@ public class TurmaController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('TURMA_READ')")
     public ResponseEntity<List<TurmaDto>> listar() {
         List<Turma> turmas = turmaService.listar();
         List<TurmaDto> turmasDto = turmaMapper.toDto(turmas);
@@ -40,6 +43,7 @@ public class TurmaController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('TURMA_WRITE')")
     public ResponseEntity<TurmaDto> criar(@RequestBody @Valid TurmaDto turmaDto) {
         Turma turma = turmaMapper.toEntity(turmaDto);
         Turma turmaSalvo = turmaService.criar(turma);
@@ -49,6 +53,7 @@ public class TurmaController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('TURMA_WRITE')")
     public ResponseEntity<TurmaDto> atualizar(@PathVariable Long id, @RequestBody @Valid TurmaDto turmaDto) {
         Turma turma = turmaMapper.toEntity(turmaDto);
         Turma turmaSalvo = turmaService.atualizar(id, turma);
@@ -58,6 +63,7 @@ public class TurmaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('TURMA_DELETE')")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         turmaService.excluir(id);
         

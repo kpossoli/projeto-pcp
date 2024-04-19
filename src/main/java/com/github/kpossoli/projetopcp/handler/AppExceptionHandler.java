@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -80,6 +81,17 @@ public class AppExceptionHandler {
 		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("login", message));
 		return ResponseEntity.status(status).body(error);
 	}
+
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<ApiResponse> handlerAccessDeniedException(AccessDeniedException e, Locale locale) {
+
+		HttpStatus status = HttpStatus.FORBIDDEN;
+		String message = messageSource.getMessage("access.denied", null, locale);
+
+		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("permissao", message));
+		return ResponseEntity.status(status).body(error);
+	}
+
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ApiResponse> handlerInternalServerError(Exception e, Locale locale) {

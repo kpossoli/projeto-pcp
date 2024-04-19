@@ -11,8 +11,10 @@ import com.github.kpossoli.projetopcp.repository.AlunoRepository;
 import com.github.kpossoli.projetopcp.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class AlunoServiceImpl implements AlunoService {
 
@@ -32,6 +34,8 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public Aluno criar(Aluno aluno) {
+        log.info("Criando aluno", aluno);
+
         var usuario = usuarioRepository.findById(aluno.getUsuario().getId())
             .orElseThrow(() -> new EmptyResultDataAccessException(1));
 
@@ -42,6 +46,8 @@ public class AlunoServiceImpl implements AlunoService {
     
     @Override
     public Aluno atualizar(Long id, Aluno aluno) {
+        log.info("Atualizando aluno de id: {}", id);
+
         Aluno alunoSalvo = obter(id);
 		BeanUtils.copyProperties(aluno, alunoSalvo, "id");
         return alunoRepository.save(alunoSalvo);
@@ -49,6 +55,8 @@ public class AlunoServiceImpl implements AlunoService {
     
     @Override
     public void excluir(Long id) {
+        log.info("Excluindo aluno de id: {}", id);
+
         alunoRepository.deleteById(id);
     }
         

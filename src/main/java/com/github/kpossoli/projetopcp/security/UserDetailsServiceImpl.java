@@ -49,9 +49,9 @@ private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
         permissoes.add("CURSO_WRITE");
         permissoes.add("CURSO_DELETE");
 
-        permissoes.add("PROFESSOR_READ");
-        permissoes.add("PROFESSOR_WRITE");
-        permissoes.add("PROFESSOR_DELETE");
+        permissoes.add("DOCENTE_READ");
+        permissoes.add("DOCENTE_WRITE");
+        permissoes.add("DOCENTE_DELETE");
 
         permissoes.add("ALUNO_READ");
         permissoes.add("ALUNO_WRITE");
@@ -75,8 +75,8 @@ private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
         permissoes.add("CURSO_READ");
         permissoes.add("CURSO_WRITE");
 
-        permissoes.add("PROFESSOR_READ");
-        permissoes.add("PROFESSOR_WRITE");
+        permissoes.add("DOCENTE_READ");
+        permissoes.add("DOCENTE_WRITE");
 
         permissoes.add("ALUNO_READ");
         permissoes.add("ALUNO_WRITE");
@@ -89,11 +89,11 @@ private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
 
         permissoes.add("PONTUACAO_READ");
     } else if (usuario.getPapel().getNome().equals("RECRUITER")) {
-        permissoes.add("PROFESSOR_READ");
-        permissoes.add("PROFESSOR_WRITE");
+        permissoes.add("DOCENTE_READ");
+        permissoes.add("DOCENTE_WRITE");
     } else if (usuario.getPapel().getNome().equals("PROFESSOR")) {
-        permissoes.add("PROFESSOR_READ");
-        permissoes.add("PROFESSOR_WRITE");
+        permissoes.add("DOCENTE_READ");
+        permissoes.add("DOCENTE_WRITE");
 
         permissoes.add("NOTAS_READ");
         permissoes.add("NOTAS_WRITE");

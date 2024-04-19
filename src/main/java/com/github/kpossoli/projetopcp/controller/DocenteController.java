@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class DocenteController {
     private final DocenteMapper docenteMapper;
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('DOCENTE_READ')")
     public ResponseEntity<DocenteDto> obter(@PathVariable Long id) {
         Docente docente = docenteService.obter(id);
         DocenteDto docenteDto = docenteMapper.toDto(docente);
@@ -32,6 +34,7 @@ public class DocenteController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('DOCENTE_READ')")
     public ResponseEntity<List<DocenteDto>> listar() {
         List<Docente> docentes = docenteService.listar();
         List<DocenteDto> docentesDto = docenteMapper.toDto(docentes);
@@ -40,6 +43,7 @@ public class DocenteController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('DOCENTE_WRITE')")
     public ResponseEntity<DocenteDto> criar(@RequestBody @Valid DocenteDto docenteDto) {
         Docente docente = docenteMapper.toEntity(docenteDto);
         Docente docenteSalvo = docenteService.criar(docente);
@@ -49,6 +53,7 @@ public class DocenteController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('DOCENTE_WRITE')")
     public ResponseEntity<DocenteDto> atualizar(@PathVariable Long id, @RequestBody @Valid DocenteDto docenteDto) {
         Docente docente = docenteMapper.toEntity(docenteDto);
         Docente docenteSalvo = docenteService.atualizar(id, docente);
@@ -58,6 +63,7 @@ public class DocenteController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('DOCENTE_DELETE')")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         docenteService.excluir(id);
 
