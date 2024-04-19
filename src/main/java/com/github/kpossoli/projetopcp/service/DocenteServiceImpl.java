@@ -44,7 +44,7 @@ public class DocenteServiceImpl implements DocenteService {
     public Docente atualizar(Long id, Docente docente) {
         Docente docenteSalvo = obter(id);
 		BeanUtils.copyProperties(docente, docenteSalvo, "id");
-        return docenteRepository.save(docente);
+        return docenteRepository.save(docenteSalvo);
     }
     
     @Override
