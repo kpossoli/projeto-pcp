@@ -1,7 +1,6 @@
 package com.github.kpossoli.projetopcp.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;

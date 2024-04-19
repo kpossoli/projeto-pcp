@@ -11,7 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
-
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -68,6 +68,16 @@ public class AppExceptionHandler {
 		String message = messageSource.getMessage("recurso.nao-encontrado", null, locale);
 
 		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("not-found", message));
+		return ResponseEntity.status(status).body(error);
+	}
+
+	@ExceptionHandler(BadCredentialsException.class)
+	public ResponseEntity<ApiResponse> handlerBadCredentialsException(BadCredentialsException e, Locale locale) {
+
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		String message = messageSource.getMessage("login.erro-login", null, locale);
+
+		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("login", message));
 		return ResponseEntity.status(status).body(error);
 	}
 
