@@ -11,8 +11,10 @@ import com.github.kpossoli.projetopcp.repository.DocenteRepository;
 import com.github.kpossoli.projetopcp.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class DocenteServiceImpl implements DocenteService {
 
@@ -32,6 +34,8 @@ public class DocenteServiceImpl implements DocenteService {
 
     @Override
     public Docente criar(Docente docente) {
+        log.info("Criando docente", docente);
+
         var usuario = usuarioRepository.findById(docente.getUsuario().getId())
             .orElseThrow(() -> new EmptyResultDataAccessException(1));
             
@@ -42,6 +46,8 @@ public class DocenteServiceImpl implements DocenteService {
     
     @Override
     public Docente atualizar(Long id, Docente docente) {
+        log.info("Atualizando docente de id: {}", id);
+
         Docente docenteSalvo = obter(id);
 		BeanUtils.copyProperties(docente, docenteSalvo, "id");
         return docenteRepository.save(docenteSalvo);
@@ -49,6 +55,8 @@ public class DocenteServiceImpl implements DocenteService {
     
     @Override
     public void excluir(Long id) {
+        log.info("Excluindo docente de id: {}", id);
+
         docenteRepository.deleteById(id);
     }
         

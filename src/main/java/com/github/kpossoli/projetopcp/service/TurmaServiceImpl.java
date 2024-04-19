@@ -11,8 +11,10 @@ import com.github.kpossoli.projetopcp.repository.DocenteRepository;
 import com.github.kpossoli.projetopcp.repository.TurmaRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class TurmaServiceImpl implements TurmaService {
 
@@ -32,6 +34,8 @@ public class TurmaServiceImpl implements TurmaService {
 
     @Override
     public Turma criar(Turma turma) {
+        log.info("Criando turma", turma);
+
         var docente = docenteRepository.findById(turma.getDocente().getId())
             .orElseThrow(() -> new EmptyResultDataAccessException(1));
             
@@ -43,6 +47,8 @@ public class TurmaServiceImpl implements TurmaService {
     
     @Override
     public Turma atualizar(Long id, Turma turma) {
+        log.info("Atualizando turma de id: {}", id);
+
         Turma turmaSalva = obter(id);
 		BeanUtils.copyProperties(turma, turmaSalva, "id");
         return turmaRepository.save(turmaSalva);
@@ -50,6 +56,8 @@ public class TurmaServiceImpl implements TurmaService {
     
     @Override
     public void excluir(Long id) {
+        log.info("Excluindo turma de id: {}", id);
+
         turmaRepository.deleteById(id);
     }
         

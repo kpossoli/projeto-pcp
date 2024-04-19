@@ -37,13 +37,18 @@ public class JwtService {
                 .getBody();
     }
 
-    private Boolean isTokenExpired(String token) {
-        return false;
+    private Boolean tokenExpirado(String token) {
+        try {
+            final Date expiration = extrairExpiracao(token);
+            return expiration.before(new Date());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public Boolean validarToken(String token, UserDetails userDetails) {
+    public boolean validarToken(String token, UserDetails userDetails) {
         final String username = extrairNomeDeUsuario(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && !tokenExpirado(token));
     }
 
     public String gerarToken(String username){

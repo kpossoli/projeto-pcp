@@ -23,6 +23,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Override
+    @SuppressWarnings("null")
     protected void doFilterInternal(HttpServletRequest request,
         HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
@@ -37,7 +38,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if(usuario != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(usuario);
-            if(jwtService.validarToken(codigo, userDetails)){
+
+            var tokenValido = jwtService.validarToken(codigo, userDetails);
+            
+            if(tokenValido){
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
