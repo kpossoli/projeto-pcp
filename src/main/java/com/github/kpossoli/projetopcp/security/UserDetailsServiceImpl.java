@@ -66,8 +66,6 @@ private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
         permissoes.add("MATERIA_DELETE");
 
         permissoes.add("PONTUACAO_READ");
-        permissoes.add("PONTUACAO_WRITE");
-        permissoes.add("PONTUACAO_DELETE");
     } else if (usuario.getPapel().getNome().equals("PEDAGOGICO")) {
         permissoes.add("TURMA_READ");
         permissoes.add("TURMA_WRITE");
