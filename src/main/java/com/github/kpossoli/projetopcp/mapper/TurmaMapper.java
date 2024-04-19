@@ -11,7 +11,7 @@ import com.github.kpossoli.projetopcp.model.Turma;
 public interface TurmaMapper {
 
     TurmaDto toDto(Turma turma);
-    List<TurmaDto> toDto(List<Turma> turma);
+    List<TurmaDto> toDto(List<Turma> turmas);
 
     Turma toEntity(TurmaDto turmaDto);
 
