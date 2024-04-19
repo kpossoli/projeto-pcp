@@ -57,9 +57,9 @@ private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
         permissoes.add("ALUNO_WRITE");
         permissoes.add("ALUNO_DELETE");
 
-        permissoes.add("NOTAS_READ");
-        permissoes.add("NOTAS_WRITE");
-        permissoes.add("NOTAS_DELETE");
+        permissoes.add("NOTA_READ");
+        permissoes.add("NOTA_WRITE");
+        permissoes.add("NOTA_DELETE");
 
         permissoes.add("MATERIA_READ");
         permissoes.add("MATERIA_WRITE");
@@ -81,8 +81,8 @@ private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
         permissoes.add("ALUNO_READ");
         permissoes.add("ALUNO_WRITE");
 
-        permissoes.add("NOTAS_READ");
-        permissoes.add("NOTAS_WRITE");
+        permissoes.add("NOTA_READ");
+        permissoes.add("NOTA_WRITE");
 
         permissoes.add("MATERIA_READ");
         permissoes.add("MATERIA_WRITE");
@@ -95,8 +95,8 @@ private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
         permissoes.add("DOCENTE_READ");
         permissoes.add("DOCENTE_WRITE");
 
-        permissoes.add("NOTAS_READ");
-        permissoes.add("NOTAS_WRITE");
+        permissoes.add("NOTA_READ");
+        permissoes.add("NOTA_WRITE");
 
         permissoes.add("PONTUACAO_READ");
     } else {
