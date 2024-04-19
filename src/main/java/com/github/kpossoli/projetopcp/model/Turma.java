@@ -1,10 +1,8 @@
 package com.github.kpossoli.projetopcp.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

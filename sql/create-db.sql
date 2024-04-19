@@ -131,9 +131,13 @@ ALTER TABLE IF EXISTS usuario
 
 CREATE INDEX idx_usuario_id_papel ON usuario (id_papel);
 
+ALTER TABLE IF EXISTS public.usuario ALTER COLUMN login SET NOT NULL;
+ALTER TABLE IF EXISTS public.usuario ADD CONSTRAINT uk_login UNIQUE (login);
 
-INSERT INTO public.papel(id, nome, version) VALUES (1, 'ADM', 1);
-INSERT INTO public.papel(id, nome, version) VALUES (2, 'PEDAGOGICO', 1);
-INSERT INTO public.papel(id, nome, version) VALUES (3, 'RECRUITER', 1);
-INSERT INTO public.papel(id, nome, version) VALUES (4, 'PROFESSOR', 1);
-INSERT INTO public.papel(id, nome, version) VALUES (5, 'ALUNO', 1);
+INSERT INTO public.papel(id, nome) VALUES (1, 'ADM');
+INSERT INTO public.papel(id, nome) VALUES (2, 'PEDAGOGICO');
+INSERT INTO public.papel(id, nome) VALUES (3, 'RECRUITER');
+INSERT INTO public.papel(id, nome) VALUES (4, 'PROFESSOR');
+INSERT INTO public.papel(id, nome) VALUES (5, 'ALUNO');
+
+INSERT INTO public.usuario(id, login, nome, senha, id_papel) VALUES (1, 'admin', 'admin', '$2a$10$yLsrjeOc5hUYJKFxgO13XejuUi3AWR26MmFSF9JH57EFwMb/i7OVW', 1);
