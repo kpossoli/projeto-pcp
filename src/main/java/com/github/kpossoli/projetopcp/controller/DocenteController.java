@@ -11,6 +11,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @RestController
@@ -22,38 +24,43 @@ public class DocenteController {
     private final DocenteMapper docenteMapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<DocenteDto> obterDocente(@PathVariable Long id) {
-        Docente docente = docenteService.obterDocente(id);
+    public ResponseEntity<DocenteDto> obter(@PathVariable Long id) {
+        Docente docente = docenteService.obter(id);
         DocenteDto docenteDto = docenteMapper.toDto(docente);
+
         return ResponseEntity.ok(docenteDto);
     }
 
     @GetMapping
-    public ResponseEntity<List<DocenteDto>> listarDocentes() {
-        List<Docente> docentes = docenteService.listarDocentes();
+    public ResponseEntity<List<DocenteDto>> listar() {
+        List<Docente> docentes = docenteService.listar();
         List<DocenteDto> docentesDto = docenteMapper.toDto(docentes);
+
         return ResponseEntity.ok(docentesDto);
     }
 
     @PostMapping
-    public ResponseEntity<DocenteDto> criarDocente(@RequestBody @Valid DocenteDto docenteDto) {
+    public ResponseEntity<DocenteDto> criar(@RequestBody @Valid DocenteDto docenteDto) {
         Docente docente = docenteMapper.toEntity(docenteDto);
-        Docente docenteSalvo = docenteService.criarDocente(docente);
+        Docente docenteSalvo = docenteService.criar(docente);
         DocenteDto docenteSalvoDto = docenteMapper.toDto(docenteSalvo);
-        return ResponseEntity.ok(docenteSalvoDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(docenteSalvoDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DocenteDto> atualizarDocente(@PathVariable Long id, @RequestBody @Valid DocenteDto docenteDto) {
+    public ResponseEntity<DocenteDto> atualizar(@PathVariable Long id, @RequestBody @Valid DocenteDto docenteDto) {
         Docente docente = docenteMapper.toEntity(docenteDto);
-        Docente docenteSalvo = docenteService.atualizarDocente(id, docente);
+        Docente docenteSalvo = docenteService.atualizar(id, docente);
         DocenteDto docenteSalvoDto = docenteMapper.toDto(docenteSalvo);
+
         return ResponseEntity.ok(docenteSalvoDto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirDocente(@PathVariable Long id) {
-        docenteService.excluirDocente(id);
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        docenteService.excluir(id);
+
         return ResponseEntity.noContent().build();
     }
 }

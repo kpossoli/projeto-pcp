@@ -39,28 +39,4 @@ public class Curso {
 	@JoinColumn(name = "id_curso")
 	private List<Materia> materias = new ArrayList<>();
 
-	public void addTurma(Turma turma) {
-		trumas.add(turma);
-	}
-
-	public void removeTurma(Turma turma) {
-		trumas.remove(turma);
-	}
-
-	public List<Turma> getTrumas() {
-		return Collections.unmodifiableList(trumas);
-	}
-
-	public void addMateria(Materia materia) {
-		materias.add(materia);
-	}
-
-	public void removeMateria(Materia materia) {
-		materias.remove(materia);
-	}
-
-	public List<Materia> getMaterias() {
-		return Collections.unmodifiableList(materias);
-	}
-
 }

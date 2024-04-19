@@ -8,6 +8,7 @@ import com.github.kpossoli.projetopcp.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,8 @@ public class UsuarioController {
         Usuario usuario = usuarioMapper.toEntity(usuarioDto);
         Usuario usuarioSalvo = usuarioService.criarUsuario(usuario);
         UsuarioDto usuarioSalvoDto = usuarioMapper.toDto(usuarioSalvo);
-        return ResponseEntity.ok(usuarioSalvoDto);
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvoDto);
     }
 
 }
