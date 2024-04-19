@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import com.github.kpossoli.projetopcp.dto.AlunoDto;
 import com.github.kpossoli.projetopcp.mapper.AlunoMapper;
 import com.github.kpossoli.projetopcp.model.Aluno;
+import com.github.kpossoli.projetopcp.model.Pontuacao;
 import com.github.kpossoli.projetopcp.service.AlunoService;
 
 import jakarta.validation.Valid;
@@ -69,5 +70,15 @@ public class AlunoController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}/pontuacao")
+    @PreAuthorize("hasAuthority('PONTUACAO_READ')")
+    public ResponseEntity<Pontuacao> obterPontuacao(@PathVariable Long id) {
+        Pontuacao pontuacao = alunoService.obterPontuacao(id);
+
+        return ResponseEntity.ok(pontuacao);
+    }
+
 }
+
 

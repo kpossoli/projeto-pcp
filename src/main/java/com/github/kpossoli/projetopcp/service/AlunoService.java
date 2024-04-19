@@ -1,6 +1,8 @@
 package com.github.kpossoli.projetopcp.service;
 
 import com.github.kpossoli.projetopcp.model.Aluno;
+import com.github.kpossoli.projetopcp.model.Pontuacao;
+
 import java.util.List;
 
 public interface AlunoService {
@@ -14,5 +16,7 @@ public interface AlunoService {
     Aluno atualizar(Long id, Aluno aluno);
     
     void excluir(Long id);
+
+    Pontuacao obterPontuacao(Long id);
 
 }
