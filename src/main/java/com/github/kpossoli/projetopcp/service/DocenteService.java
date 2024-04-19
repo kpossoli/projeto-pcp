@@ -5,14 +5,14 @@ import java.util.List;
 
 public interface DocenteService {
 
-    Docente obterDocente(Long id);
+    Docente obter(Long id);
 
-    List<Docente> listarDocentes();
+    List<Docente> listar();
 
-    Docente criarDocente(Docente docente);
+    Docente criar(Docente docente);
     
-    Docente atualizarDocente(Long id, Docente docente);
+    Docente atualizar(Long id, Docente docente);
     
-    void excluirDocente(Long id);
+    void excluir(Long id);
 
 }

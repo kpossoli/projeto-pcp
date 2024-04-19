@@ -37,20 +37,8 @@ public class Turma {
 	@Getter @Setter
 	private Docente docente;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "id_turma")
 	private List<Aluno> alunos = new ArrayList<>();
-
-	public void addAluno(Aluno aluno) {
-		alunos.add(aluno);
-	}
-
-	public void removeAluno(Aluno aluno) {
-		alunos.remove(aluno);
-	}
-
-	public List<Aluno> getAlunos() {
-		return Collections.unmodifiableList(alunos);
-	}
 
 }

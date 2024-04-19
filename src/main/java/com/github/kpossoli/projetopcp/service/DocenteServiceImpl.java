@@ -20,18 +20,18 @@ public class DocenteServiceImpl implements DocenteService {
     private final UsuarioRepository usuarioRepository;
 
     @Override
-    public Docente obterDocente(Long id) {
+    public Docente obter(Long id) {
         return docenteRepository.findById(id)
             .orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 
     @Override
-    public List<Docente> listarDocentes() {
+    public List<Docente> listar() {
         return docenteRepository.findAll();
     }
 
     @Override
-    public Docente criarDocente(Docente docente) {
+    public Docente criar(Docente docente) {
         var usuario = usuarioRepository.findById(docente.getUsuario().getId())
             .orElseThrow(() -> new EmptyResultDataAccessException(1));
             
@@ -41,14 +41,14 @@ public class DocenteServiceImpl implements DocenteService {
     }
     
     @Override
-    public Docente atualizarDocente(Long id, Docente docente) {
-        Docente docenteSalvo = obterDocente(id);
+    public Docente atualizar(Long id, Docente docente) {
+        Docente docenteSalvo = obter(id);
 		BeanUtils.copyProperties(docente, docenteSalvo, "id");
         return docenteRepository.save(docente);
     }
     
     @Override
-    public void excluirDocente(Long id) {
+    public void excluir(Long id) {
         docenteRepository.deleteById(id);
     }
         
