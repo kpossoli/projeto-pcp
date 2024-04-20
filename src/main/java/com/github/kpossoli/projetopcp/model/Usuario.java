@@ -32,7 +32,7 @@ public class Usuario {
 	@Getter @Setter
 	private String senha;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_papel")
 	@Getter @Setter
 	private Papel papel;

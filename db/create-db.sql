@@ -28,14 +28,14 @@ CREATE TABLE materia (
 	CONSTRAINT pk_materia PRIMARY KEY (id)
 );
 
-CREATE TABLE notas (
+CREATE TABLE nota (
 	id bigserial NOT NULL,
 	data date,
 	valor numeric(19, 2),
 	id_aluno int8,
 	id_docente int8,
 	id_materia int8,
-	CONSTRAINT pk_notas PRIMARY KEY (id)
+	CONSTRAINT pk_nota PRIMARY KEY (id)
 );
 
 CREATE TABLE papel (
@@ -89,26 +89,26 @@ ALTER TABLE IF EXISTS materia
 
 CREATE INDEX idx_materia_id_curso ON materia (id_curso);
 
-ALTER TABLE IF EXISTS notas
-	add CONSTRAINT fk_notas_aluno
+ALTER TABLE IF EXISTS nota
+	add CONSTRAINT fk_nota_aluno
 	FOREIGN KEY (id_aluno)
 	REFERENCES aluno;
 
-CREATE INDEX idx_notas_id_aluno ON notas (id_aluno);
+CREATE INDEX idx_nota_id_aluno ON nota (id_aluno);
 
-ALTER TABLE IF EXISTS notas
-	add CONSTRAINT fk_notas_docente
+ALTER TABLE IF EXISTS nota
+	add CONSTRAINT fk_nota_docente
 	FOREIGN KEY (id_docente)
 	REFERENCES docente;
 
-CREATE INDEX idx_notas_id_docente ON notas (id_docente);
+CREATE INDEX idx_nota_id_docente ON nota (id_docente);
 
-ALTER TABLE IF EXISTS notas
-	add CONSTRAINT fk_notas_materia
+ALTER TABLE IF EXISTS nota
+	add CONSTRAINT fk_nota_materia
 	FOREIGN KEY (id_materia)
 	REFERENCES materia;
 
-CREATE INDEX idx_notas_id_materia ON notas (id_materia);
+CREATE INDEX idx_nota_id_materia ON nota (id_materia);
 
 ALTER TABLE IF EXISTS turma
 	add CONSTRAINT fk_turma_docente
@@ -131,9 +131,13 @@ ALTER TABLE IF EXISTS usuario
 
 CREATE INDEX idx_usuario_id_papel ON usuario (id_papel);
 
+ALTER TABLE IF EXISTS public.usuario ALTER COLUMN login SET NOT NULL;
+ALTER TABLE IF EXISTS public.usuario ADD CONSTRAINT uk_login UNIQUE (login);
 
-INSERT INTO public.papel(id, nome, version) VALUES (1, 'ADM', 1);
-INSERT INTO public.papel(id, nome, version) VALUES (2, 'PEDAGOGICO', 1);
-INSERT INTO public.papel(id, nome, version) VALUES (3, 'RECRUITER', 1);
-INSERT INTO public.papel(id, nome, version) VALUES (4, 'PROFESSOR', 1);
-INSERT INTO public.papel(id, nome, version) VALUES (5, 'ALUNO', 1);
+INSERT INTO public.papel(id, nome) VALUES (1, 'ADM');
+INSERT INTO public.papel(id, nome) VALUES (2, 'PEDAGOGICO');
+INSERT INTO public.papel(id, nome) VALUES (3, 'RECRUITER');
+INSERT INTO public.papel(id, nome) VALUES (4, 'PROFESSOR');
+INSERT INTO public.papel(id, nome) VALUES (5, 'ALUNO');
+
+INSERT INTO public.usuario(id, login, nome, senha, id_papel) VALUES (1, 'admin', 'admin', '$2a$10$yLsrjeOc5hUYJKFxgO13XejuUi3AWR26MmFSF9JH57EFwMb/i7OVW', 1);
