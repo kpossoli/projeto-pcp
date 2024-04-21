@@ -3,8 +3,11 @@ package com.github.kpossoli.projetopcp.controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.github.kpossoli.projetopcp.dto.CursoDto;
+import com.github.kpossoli.projetopcp.dto.MateriaDto;
 import com.github.kpossoli.projetopcp.mapper.CursoMapper;
+import com.github.kpossoli.projetopcp.mapper.MateriaMapper;
 import com.github.kpossoli.projetopcp.model.Curso;
+import com.github.kpossoli.projetopcp.model.Materia;
 import com.github.kpossoli.projetopcp.service.CursoService;
 
 import jakarta.validation.Valid;
@@ -23,6 +26,7 @@ public class CursoController {
 
     private final CursoService cursoService;
     private final CursoMapper cursoMapper;
+    private final MateriaMapper materiaMapper;
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('CURSO_READ')")
@@ -40,6 +44,15 @@ public class CursoController {
         List<CursoDto> cursosDto = cursoMapper.toDto(cursos);
 
         return ResponseEntity.ok(cursosDto);
+    }
+
+    @GetMapping("/{id}/materias")
+    @PreAuthorize("hasAuthority('CURSO_READ')")
+    public ResponseEntity<List<MateriaDto>> listarMaterias(@PathVariable Long id) {
+        List<Materia> materias = cursoService.listarMaterias(id);
+        List<MateriaDto> materiasDto = materiaMapper.toDto(materias);
+
+        return ResponseEntity.ok(materiasDto);
     }
 
     @PostMapping

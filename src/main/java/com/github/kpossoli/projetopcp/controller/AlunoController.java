@@ -3,8 +3,11 @@ package com.github.kpossoli.projetopcp.controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.github.kpossoli.projetopcp.dto.AlunoDto;
+import com.github.kpossoli.projetopcp.dto.NotaDto;
 import com.github.kpossoli.projetopcp.mapper.AlunoMapper;
+import com.github.kpossoli.projetopcp.mapper.NotaMapper;
 import com.github.kpossoli.projetopcp.model.Aluno;
+import com.github.kpossoli.projetopcp.model.Nota;
 import com.github.kpossoli.projetopcp.model.Pontuacao;
 import com.github.kpossoli.projetopcp.service.AlunoService;
 
@@ -24,6 +27,7 @@ public class AlunoController {
 
     private final AlunoService alunoService;
     private final AlunoMapper alunoMapper;
+    private final NotaMapper notaMapper;
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ALUNO_READ')")
@@ -34,11 +38,11 @@ public class AlunoController {
         return ResponseEntity.ok(alunoDto);
     }
 
-    @GetMapping
+    @GetMapping("/{id}/notas")
     @PreAuthorize("hasAuthority('ALUNO_READ')")
-    public ResponseEntity<List<AlunoDto>> listar() {
-        List<Aluno> alunos = alunoService.listar();
-        List<AlunoDto> alunosDto = alunoMapper.toDto(alunos);
+    public ResponseEntity<List<NotaDto>> listar(@PathVariable Long id) {
+        List<Nota> notas = alunoService.notas(id);
+        List<NotaDto> alunosDto = notaMapper.toDto(notas);
 
         return ResponseEntity.ok(alunosDto);
     }

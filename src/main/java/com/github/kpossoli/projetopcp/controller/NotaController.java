@@ -19,7 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/notas")
-public class NataController {
+public class NotaController {
 
     private final NotaService notaService;
     private final NotaMapper notaMapper;

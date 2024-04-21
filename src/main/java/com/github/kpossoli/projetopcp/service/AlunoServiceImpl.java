@@ -85,4 +85,10 @@ public class AlunoServiceImpl implements AlunoService {
         return pontuacaoAluno;
     }
 
+    @Override
+    public List<Nota> notas(Long id) {
+        Aluno aluno = obter(id);
+        return notaRepository.findByAlunoId(aluno.getId());
+    }
+
 }

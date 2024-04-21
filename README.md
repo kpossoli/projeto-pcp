@@ -26,9 +26,22 @@ Finalmente, temos as branches `hotfix`, que são criadas a partir da `main` para
 
 ## Banco de Dados
 
-Este projeto utiliza o PostgreSQL como sistema de gerenciamento de banco de dados. Certifique-se de ter o PostgreSQL instalado e configurado corretamente em seu ambiente local para executar este projeto. No diretório db existe um arquivo *.sql contendo as DDL e os dados iniciais. A senha padrão do usuário admin é: `senhaSegura123`.
-
 ![PostgreSQL](/doc/pg.png)
+
+Este projeto utiliza o PostgreSQL como sistema de gerenciamento de banco de dados. Certifique-se de ter o PostgreSQL instalado e configurado corretamente em seu ambiente local para executar este projeto.
+
+Para usar o PostgresSQL usando o Docker, rode os comandos abaixo.
+
+```sh
+docker volume create pgdb
+docker network create pgnet
+docker run -d --name postgres -p 5432:5432 --network pgnet -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=123456 -e POSTGRES_DB=projeto-pcp -v pgdb:/var/lib/postgresql/data postgres:15.6-alpine
+docker run -d --name pgadmin -p 8000:80 --network pgnet -e PGADMIN_DEFAULT_EMAIL=postgres -e PGADMIN_DEFAULT_PASSWORD=123456 -d dpage/pgadmin4
+```
+
+acesse `http://localhost:8000`, abra o editor que query e cole o conteúdo do arquivo create-db.sql, localizado diretório sql, execute os comando para criar os DDL do projeto.
+
+A senha padrão do usuário admin do sistema é: `senhaSegura123`.
 
 ## Execução do Projeto
 
@@ -58,37 +71,39 @@ Para executar o projeto pela linha de comando, siga os passos abaixo:
 
 A aplicação possui os seguintes endpoints:
 
-- /alunos [GET]
 - /alunos [POST]
 - /alunos/{id} [DELETE]
 - /alunos/{id} [GET]
 - /alunos/{id} [PUT]
+- /alunos/{id}/notas [GET]
+- /alunos/{id}/pontuacao [GET]
+- /cadastro [POST]
 - /cursos [GET]
 - /cursos [POST]
 - /cursos/{id} [DELETE]
 - /cursos/{id} [GET]
 - /cursos/{id} [PUT]
+- /cursos/{id}/materias [GET]
 - /docentes [GET]
 - /docentes [POST]
 - /docentes/{id} [DELETE]
 - /docentes/{id} [GET]
 - /docentes/{id} [PUT]
+- /login [POST]
 - /matérias [GET]
 - /matérias [POST]
 - /materias/{id} [DELETE]
 - /materias/{id} [GET]
 - /materias/{id} [PUT]
-- /notas [CET]
+- /notas [GET]
 - /notas [POST]
 - /notas/{id} [DELETE]
-- /notas/{id} [CET]
+- /notas/{id} [GET]
 - /notas/{id} [PUT]
-- /turmas [CET]
+- /turmas [GET]
 - /turmas [POST]
 - /turmas/{id} [DELETE]
-- /turmas/{id} [CET]
+- /turmas/{id} [GET]
 - /turmas/{id} [PUT]
-- /usuários [POST]
-- /usuarios/login [POST]
 
 Para mais detalhes consultar o arquivo do Postman no diretório doc.

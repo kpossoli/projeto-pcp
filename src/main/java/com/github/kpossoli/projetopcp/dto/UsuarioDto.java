@@ -1,6 +1,7 @@
 package com.github.kpossoli.projetopcp.dto;
 
 import lombok.Data;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
