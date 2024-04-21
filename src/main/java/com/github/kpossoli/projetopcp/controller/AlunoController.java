@@ -29,6 +29,15 @@ public class AlunoController {
     private final AlunoMapper alunoMapper;
     private final NotaMapper notaMapper;
 
+    @GetMapping
+    @PreAuthorize("hasAuthority('ALUNO_READ')")
+    public ResponseEntity<List<AlunoDto>> listar() {
+        List<Aluno> alunos = alunoService.listar();
+        List<AlunoDto> alunosDto = alunoMapper.toDto(alunos);
+
+        return ResponseEntity.ok(alunosDto);
+    }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ALUNO_READ')")
     public ResponseEntity<AlunoDto> obter(@PathVariable Long id) {

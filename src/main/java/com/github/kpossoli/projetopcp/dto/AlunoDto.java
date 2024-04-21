@@ -2,7 +2,7 @@ package com.github.kpossoli.projetopcp.dto;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,7 +20,7 @@ public class AlunoDto {
 	private LocalDate dataNascimento;
 
 	@NotNull
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private UsuarioDto usuario;
 
 }
