@@ -47,15 +47,6 @@ public class AlunoController {
         return ResponseEntity.ok(alunoDto);
     }
 
-    @GetMapping("/{id}/notas")
-    @PreAuthorize("hasAuthority('ALUNO_READ')")
-    public ResponseEntity<List<NotaDto>> listar(@PathVariable Long id) {
-        List<Nota> notas = alunoService.notas(id);
-        List<NotaDto> alunosDto = notaMapper.toDto(notas);
-
-        return ResponseEntity.ok(alunosDto);
-    }
-
     @PostMapping
     @PreAuthorize("hasAuthority('ALUNO_WRITE')")
     public ResponseEntity<AlunoDto> criar(@RequestBody @Valid AlunoDto alunoDto) {
@@ -91,6 +82,16 @@ public class AlunoController {
 
         return ResponseEntity.ok(pontuacao);
     }
+
+    @GetMapping("/{id}/notas")
+    @PreAuthorize("hasAuthority('NOTA_READ')")
+    public ResponseEntity<List<NotaDto>> listar(@PathVariable Long id) {
+        List<Nota> notas = alunoService.notas(id);
+        List<NotaDto> alunosDto = notaMapper.toDto(notas);
+
+        return ResponseEntity.ok(alunosDto);
+    }
+
 
 }
 
