@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a706ee8a-6194-43d4-b707-1026994ee81c",
+		"_postman_id": "7dd6687f-b853-4d7f-b8e7-3f3f2eebee7c",
 		"name": "Projeto PCP",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11013600"
+		"_exporter_id": "33277061"
 	},
 	"item": [
 		{
@@ -81,7 +81,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Felipe Aguair\",\r\n    \"usuario\": {\r\n        \"id\": 15\r\n    }\r\n}",
+							"raw": "{\r\n    \"nome\": \"aluno2\",\r\n    \"dataNascimento\": \"1995-03-03\",\r\n    \"usuario\": {\r\n        \"id\": 5\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1120,33 +1120,6 @@
 							],
 							"path": [
 								"notas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "notas/lancar",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"disciplinaMatriculaId\": 3,\r\n    \"nota\": 6.0,\r\n    \"coeficiente\": 0.2\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BaseUrl}}/notas/lancar",
-							"host": [
-								"{{BaseUrl}}"
-							],
-							"path": [
-								"notas",
-								"lancar"
 							]
 						}
 					},

@@ -79,26 +79,18 @@ private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
         permissoes.add("ALUNO_READ");
         permissoes.add("ALUNO_WRITE");
 
-        permissoes.add("NOTA_READ");
-        permissoes.add("NOTA_WRITE");
-
-        permissoes.add("MATERIA_READ");
-        permissoes.add("MATERIA_WRITE");
-
         permissoes.add("PONTUACAO_READ");
     } else if (usuario.getPapel().getNome().equals("RECRUITER")) {
         permissoes.add("DOCENTE_READ");
         permissoes.add("DOCENTE_WRITE");
     } else if (usuario.getPapel().getNome().equals("PROFESSOR")) {
-        permissoes.add("DOCENTE_READ");
-        permissoes.add("DOCENTE_WRITE");
 
         permissoes.add("NOTA_READ");
         permissoes.add("NOTA_WRITE");
 
         permissoes.add("PONTUACAO_READ");
     } else {
-        permissoes.add("NOTAS_READ");
+        permissoes.add("NOTA_READ");
         permissoes.add("PONTUACAO_READ");
     }
 
