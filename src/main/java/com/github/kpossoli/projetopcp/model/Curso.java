@@ -30,11 +30,13 @@ public class Curso {
 	@Getter @Setter
 	private String nome;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@Getter @Setter
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "id_curso")
-	private List<Turma> trumas = new ArrayList<>();
+	private List<Turma> turmas = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@Getter @Setter
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "id_curso")
 	private List<Materia> materias = new ArrayList<>();
 
