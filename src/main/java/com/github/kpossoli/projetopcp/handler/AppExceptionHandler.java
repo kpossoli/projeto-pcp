@@ -25,17 +25,17 @@ import lombok.extern.slf4j.Slf4j;
 @RestControllerAdvice
 public class AppExceptionHandler {
 
-	private final MessageSource messageSource;
+	private final MessageSource m;
 
 	@ExceptionHandler({ HttpMessageConversionException.class })
 	public ResponseEntity<ApiResponse> handleHttpMessageConversionException(HttpMessageConversionException e,
 			Locale locale) {
 
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		String message = messageSource.getMessage("mensagem.invalida", null, locale);
+		String message = m.getMessage("mensagem.invalida", null, locale);
 
 		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("json_parse", message));
-		return ResponseEntity.badRequest().body(error);
+		return ResponseEntity.status(status).body(error);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -44,19 +44,21 @@ public class AppExceptionHandler {
 
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 
-		List<ApiMessage> messages = e.getBindingResult().getFieldErrors().stream()
-			.map(f -> new ApiMessage("validation", messageSource.getMessage(f, locale)))
-			.collect(Collectors.toList());
+		List<ApiMessage> messages = e.getBindingResult()
+				.getFieldErrors()
+				.stream()
+				.map(f -> new ApiMessage(f.getField(), m.getMessage(f, locale)))
+				.collect(Collectors.toList());
 
 		ApiResponse error = ApiResponse.of(status.value(), messages);
-		return ResponseEntity.badRequest().body(error);
+		return ResponseEntity.status(status).body(error);
 	}
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity<ApiResponse> handlerDataIntegrityViolationException(DataIntegrityViolationException e, Locale locale) {
 
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		String message = messageSource.getMessage("integridade.referencial", null, locale);
+		String message = m.getMessage("integridade.referencial", null, locale);
 
 		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("referential-integrity", message));
 		return ResponseEntity.status(status).body(error);
@@ -66,7 +68,7 @@ public class AppExceptionHandler {
 	public ResponseEntity<ApiResponse> handlerEmptyResultDataAccessException(EmptyResultDataAccessException e, Locale locale) {
 
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		String message = messageSource.getMessage("recurso.nao-encontrado", null, locale);
+		String message = m.getMessage("recurso.nao-encontrado", null, locale);
 
 		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("not-found", message));
 		return ResponseEntity.status(status).body(error);
@@ -76,7 +78,7 @@ public class AppExceptionHandler {
 	public ResponseEntity<ApiResponse> handlerBadCredentialsException(BadCredentialsException e, Locale locale) {
 
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		String message = messageSource.getMessage("login.erro-login", null, locale);
+		String message = m.getMessage("login.erro-login", null, locale);
 
 		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("login", message));
 		return ResponseEntity.status(status).body(error);
@@ -86,7 +88,7 @@ public class AppExceptionHandler {
 	public ResponseEntity<ApiResponse> handlerAccessDeniedException(AccessDeniedException e, Locale locale) {
 
 		HttpStatus status = HttpStatus.FORBIDDEN;
-		String message = messageSource.getMessage("access.denied", null, locale);
+		String message = m.getMessage("access.denied", null, locale);
 
 		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("permissao", message));
 		return ResponseEntity.status(status).body(error);
@@ -98,7 +100,7 @@ public class AppExceptionHandler {
 		log.error("Error not expected", e);
 
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-		String message = messageSource.getMessage("erro.desconhecido", null, locale);
+		String message = m.getMessage("erro.desconhecido", null, locale);
 
 		ApiResponse error = ApiResponse.of(status.value(), new ApiMessage("error", message));
 		return ResponseEntity.status(status).body(error);

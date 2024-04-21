@@ -7,6 +7,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.github.kpossoli.projetopcp.model.Curso;
+import com.github.kpossoli.projetopcp.model.Materia;
 import com.github.kpossoli.projetopcp.repository.CursoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,6 @@ public class CursoServiceImpl implements CursoService {
     public Curso criar(Curso curso) {
         log.info("Criando curso", curso);
         
-
         return cursoRepository.save(curso);
     }
     
@@ -52,6 +52,12 @@ public class CursoServiceImpl implements CursoService {
         log.info("Excluindo curso de id: {}", id);
 
         cursoRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Materia> listarMaterias(Long id) {
+        Curso curso = obter(id);
+        return curso.getMaterias();
     }
         
 }
